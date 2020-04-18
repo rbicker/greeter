@@ -7,16 +7,19 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.greeter.rule=Host(`greeter.asdf.ooo`)
-      - traefik.http.services.loadbalancer.server.scheme=h2c
+      - traefik.http.services.greeter.loadbalancer.server.scheme=h2c
       - traefik.http.routers.greeter.tls=true
       - traefik.http.routers.greeter.tls.certresolver=namedotcom
       - traefik.http.routers.greeter.tls.domains[0].main=*.asdf.ooo
   envoy:
-    image: envoyproxy/envoy:latest
+    image: envoyproxy/envoy:v1.14.1
     restart: unless-stopped
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
     labels:
       - traefik.enable=true
       - traefik.http.routers.greeter-web.rule=Host(`greeter-web.asdf.ooo`)
+      - traefik.http.services.greeter-web.loadbalancer.server.port=8080
       - traefik.http.routers.greeter-web.tls=true
       - traefik.http.routers.greeter-web.tls.certresolver=namedotcom
       - traefik.http.routers.greeter-web.tls.domains[0].main=*.asdf.ooo
