@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	greetpb "github.com/rbicker/greeter/api/proto/v1"
+	"google.golang.org/grpc/credentials"
 	"io"
 	"log"
+	"os"
 	"time"
 
 	"google.golang.org/grpc/codes"
@@ -15,7 +18,11 @@ import (
 )
 
 func main() {
-	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	target := "greeter.asdf.ooo:443"
+	if v, ok := os.LookupEnv("GREETER_TARGET"); ok {
+		target = v
+	}
+	cc, err := grpc.Dial(target, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 	if err != nil {
 		log.Fatalf("could not connect: %v", err)
 	}
