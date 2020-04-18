@@ -1,0 +1,21 @@
+---
+services:
+  greeter:
+    image: rbicker/greeter:latest
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.greeter.rule=Host(`greeter.asdf.ooo`)
+      - traefik.http.services.loadbalancer.server.scheme=h2c
+      - traefik.http.routers.greeter.tls=true
+      - traefik.http.routers.greeter.tls.certresolver=namedotcom
+      - traefik.http.routers.greeter.tls.domains[0].main=*.asdf.ooo
+  envoy:
+    image: envoyproxy/envoy:latest
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.greeter-web.rule=Host(`greeter-web.asdf.ooo`)
+      - traefik.http.routers.greeter-web.tls=true
+      - traefik.http.routers.greeter-web.tls.certresolver=namedotcom
+      - traefik.http.routers.greeter-web.tls.domains[0].main=*.asdf.ooo
