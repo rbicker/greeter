@@ -24,5 +24,6 @@ GREETER_TARGET=greeter.asdf.ooo:443 go run ./cmd/greeter-client/client.go
 cd ./web-client
 # install dev dependencies
 npm install
-np
+# replace greeter-web.asdf.ooo with your domain
+SERVER_URL="https://greeter-web.asdf.ooo" npm run dev
 ```
