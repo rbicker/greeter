@@ -9,7 +9,7 @@ Greeter
 
 # run the server
 * you need to have docker and docker-compose installed
-* open the traefik labels and adjust the host rules (replace with your domains) and the certresolver
+* open the docker-compose.yml, edit the traefik labels and adjust the host rules (replace with your domains) and the certresolver
 * run ```docker-compose up -d```
 
 # run the golang client
