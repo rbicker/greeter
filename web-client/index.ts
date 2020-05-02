@@ -2,7 +2,7 @@ import * as grpcWeb from 'grpc-web';
 import {GreetServiceClient} from './greet/GreetServiceClientPb'
 import {Greeting, GreetRequest, GreetResponse} from "./greet/greet_pb";
 
-const client = new GreetServiceClient('https://greeter-web.asdf.ooo');
+const client = new GreetServiceClient(process.env.SERVER_URL || 'https://greeter-web.asdf.ooo');
 const request = new GreetRequest();
 const greeting = new Greeting();
 greeting.setFirstName('Raphael');

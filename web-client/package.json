@@ -8,6 +8,7 @@
     "google-protobuf": "^3.6.1",
     "grpc": "^1.15.0",
     "grpc-web": "^1.0.0",
+    "parcel": "^1.12.4",
     "typescript": "^3.8.3"
   },
   "scripts": {
@@ -16,7 +17,5 @@
   },
   "author": "Raphael Bicker",
   "license": "MIT",
-  "dependencies": {
-    "parcel": "^1.12.4"
-  }
+  "dependencies": {}
 }
